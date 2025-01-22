@@ -1,0 +1,10 @@
+{
+  "type": "archive",
+  "url": "https://github.com/libsdl-org/SDL/releases/download/release-3.2.0/SDL3-devel-3.2.0-VC.zip",
+  "integrity": "sha256-A7YoFoIpr8oYujaftLP0aCYiH5nuRQC6HwpME4Tyt28=",
+  "strip_prefix": "SDL3-3.2.0",
+  "overlay": {
+    "MODULE.bazel": "sha256-BXMfBKQ+8yQWVXrPPHQK9nrwE3P4gVGiITRnnIyyy3o=",
+    "BUILD.bazel": "sha256-WkD5OcRIZFbwv1HU26gIZn1G0wJC3AsSAX9xPIWsqCc="
+  }
+}
