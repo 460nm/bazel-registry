@@ -1,6 +1,0 @@
-module(
-    name = "bazel_registry",
-    version = "0.0.0",
-    compatibility_level = 1,
-)
-
