@@ -1,5 +1,4 @@
 {
-  "type": "git_repository",
-  "remote": "https://git.stevenlr.com/460nm/asl.git",
-  "commit": "afbfd0e78176d47c495a29c795fbd3690fa0ded3"
+  "url": "https://bazel.stevenlr.com/blobs/asl/0.3.0-NvcVEwRjIK.tar.gz",
+  "integrity": "sha256-NvcVEwRjIKHSO2MVKO/HsemTGyoSgOzcTZTkQ6PaGHs="
 }
