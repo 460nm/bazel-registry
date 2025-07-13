@@ -1,0 +1,17 @@
+name: Synchronize Bazel registry
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Sync-Registry:
+    container:
+      image: 460nm-runner
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Write private key
+        run: echo "${{ secrets.PRIVATE_KEY }}" > key && chmod 600 ./key
+      - name: Synchronize registry
+        run: rsync -av -e 'ssh -p ${{ secrets.SSH_PORT }} -i ./key -o StrictHostKeyChecking=no' ./modules/ bazel@stevenlr.com:${{ secrets.MODULES_PATH }}
