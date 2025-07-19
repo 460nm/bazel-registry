@@ -7,11 +7,11 @@ on:
 jobs:
   Sync-Registry:
     container:
-      image: 460nm-runner
+      image: stevenlr.com/runner:1
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Write private key
         run: echo "${{ secrets.PRIVATE_KEY }}" > key && chmod 600 ./key
       - name: Synchronize registry
-        run: rsync -av -e 'ssh -p ${{ secrets.SSH_PORT }} -i ./key -o StrictHostKeyChecking=no' ./modules/ bazel@stevenlr.com:${{ secrets.MODULES_PATH }}
+        run: rsync -avO -e 'ssh -p ${{ secrets.SSH_PORT }} -i ./key -o StrictHostKeyChecking=no' ./modules/ www-write@stevenlr.com:${{ secrets.MODULES_PATH }}
