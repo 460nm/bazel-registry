@@ -14,4 +14,5 @@ jobs:
       - name: Write private key
         run: echo "${{ secrets.PRIVATE_KEY }}" > key && chmod 600 ./key
       - name: Synchronize registry
-        run: rsync -avO -e 'ssh -p ${{ secrets.SSH_PORT }} -i ./key -o StrictHostKeyChecking=no' ./modules/ www-write@stevenlr.com:${{ secrets.MODULES_PATH }}
+        run: rsync -rvz --delete --chmod=ugo=rwX -e 'ssh -p ${{ secrets.SSH_PORT }} -i ./key -o StrictHostKeyChecking=no' ./modules/ www-write@stevenlr.com:${{ secrets.MODULES_PATH }}
+
