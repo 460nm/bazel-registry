@@ -69,7 +69,7 @@ if __name__ == "__main__":
 
     module_content = extract_module_content(archive_file, archive_prefix)
     integrity = file_hash(archive_file)
-    partial_hash = integrity[7:17]
+    partial_hash = integrity[7:17].replace("/", "_")
 
     registry_module_path.mkdir(parents=True, exist_ok=True)
     with open(registry_module_path / "MODULE.bazel", "wb+") as f:
