@@ -1,18 +1,24 @@
 name: Synchronize Bazel registry
 on:
   push:
-    branches:
-      - main
+    # branches:
+      # - main
 
 jobs:
-  Sync-Registry:
-    container:
-      image: stevenlr.com/runner:1
+  sync-registry:
+    runs-on: 460nm-runner-base-alpine
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Write private key
-        run: echo "${{ secrets.PRIVATE_KEY }}" > key && chmod 600 ./key
-      - name: Synchronize registry
-        run: rsync -rvz --delete --chmod=ugo=rwX -e 'ssh -p ${{ secrets.SSH_PORT }} -i ./key -o StrictHostKeyChecking=no' ./modules/ www-write@stevenlr.com:${{ secrets.MODULES_PATH }}
+      - run: echo $GITHUB_REPOSITORY
+      - run: echo $GITHUB_SHA
+      - run: git clone --depth 1 --revision $GITHUB_SHA $GITHUB_ACTION_REPOSITORY
+  # Sync-Registry:
+  #   container:
+  #     image: stevenlr.com/runner:1
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #     - name: Write private key
+  #       run: echo "${{ secrets.PRIVATE_KEY }}" > key && chmod 600 ./key
+  #     - name: Synchronize registry
+  #       run: rsync -rvz --delete --chmod=ugo=rwX -e 'ssh -p ${{ secrets.SSH_PORT }} -i ./key -o StrictHostKeyChecking=no' ./modules/ www-write@stevenlr.com:${{ secrets.MODULES_PATH }}
 
