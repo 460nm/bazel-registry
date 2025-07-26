@@ -5,14 +5,11 @@ on:
       - main
 
 jobs:
-  Sync-Registry:
-    container:
-      image: stevenlr.com/runner:1
+  sync-registry:
+    runs-on: 460nm-runner-base-alpine
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: https://git.stevenlr.com/460nm/actions/checkout@v1
       - name: Write private key
         run: echo "${{ secrets.PRIVATE_KEY }}" > key && chmod 600 ./key
       - name: Synchronize registry
         run: rsync -rvz --delete --chmod=ugo=rwX -e 'ssh -p ${{ secrets.SSH_PORT }} -i ./key -o StrictHostKeyChecking=no' ./modules/ www-write@stevenlr.com:${{ secrets.MODULES_PATH }}
-
