@@ -1,4 +1,5 @@
 {
-  "url": "https://bazel.stevenlr.com/blobs/asl/0.1.0-E0yyEgMYS3.tar.gz",
-  "integrity": "sha256-E0yyEgMYS3a8Y+oiHzdQNHvTobSXlsDjOrwvDv02Eao="
+  "url": "https://git.stevenlr.com/460nm/asl/archive/v0.1.0.tar.gz",
+  "integrity": "sha256-O6x4R8jvDDaxySXnJJWJVX4lGOcp3rITBqM5ubg/uH8=",
+  "strip_prefix": "asl"
 }
