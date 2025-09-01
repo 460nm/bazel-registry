@@ -1,0 +1,37 @@
+name: "Publish forgejo module"
+inputs:
+  repository:
+    description: "Repository"
+    default: ${{ forge.repository }}
+  version:
+    description: "Module version"
+  host:
+    description: "Forgejo instance URL"
+    default: ${{ forge.server_url }}
+  tag:
+    description: "Module tag"
+  module_name:
+    description: "Module name"
+  module_file:
+    description: "Module file"
+    default: MODULE.bazel
+runs:
+  using: composite
+  steps:
+    - run: |
+        tag=${{ inputs.tag }} 
+        tag=${tag:-"v${{ inputs.version }}"}
+        owner=$(echo "${{ inputs.repository }}" | cut -d / -f 1 -)
+        repo=$(echo "${{ inputs.repository }}" | cut -d / -f 2 -)
+        module_name=${module_name:-$repo}
+        ${{ forge.ACTION_PATH }}/../../tools/add_module_forgejo.sh \
+          -m "${{ inputs.module_file }}" \
+          -n $module_name \
+          -h "${{ inputs.host }}" \
+          -t $tag \
+          $owner $repo "${{ inputs.version }}"
+        git checkout -b __tmp_${module_name}_${{ inputs.version }}
+        git config user.email ci@git.stevenlr.com
+        git config user.name "CI"
+        git add modules/*
+        git commit -m "Add ${module_name} version ${{ inputs.version }}"
