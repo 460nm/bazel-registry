@@ -1,0 +1,30 @@
+load("@rules_license//rules:license.bzl", "license")
+
+license(
+    name = "license",
+    license_kinds = [
+        "@rules_license//licenses/spdx:Zlib",
+    ],
+    license_text = "LICENSE.txt",
+    package_name = "SDL 3",
+    package_url = "https://libsdl.org/",
+)
+
+package(
+    default_applicable_licenses = ["//:license"],
+)
+
+cc_import(
+    name = "sdl3_imp",
+    interface_library = "lib/x64/SDL3.lib",
+    shared_library = "lib/x64/SDL3.dll",
+)
+
+cc_library(
+    name = "sdl3",
+    hdrs = glob(["include/SDL3/*.h"]),
+    includes = ["include"],
+    deps = [":sdl3_imp"],
+    visibility = ["//visibility:public"],
+)
+
