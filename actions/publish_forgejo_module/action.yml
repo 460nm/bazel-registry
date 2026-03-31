@@ -33,5 +33,5 @@ runs:
         git checkout -b __tmp_${module_name}_${{ inputs.version }}
         git config user.email ci@git.stevenlr.com
         git config user.name "CI"
-        git add modules/*
+        git add modules/${module_name}/*
         git commit -m "Add ${module_name} version ${{ inputs.version }}"
