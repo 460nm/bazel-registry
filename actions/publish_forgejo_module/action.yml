@@ -23,6 +23,7 @@ runs:
         tag=${tag:-"v${{ inputs.version }}"}
         owner=$(echo "${{ inputs.repository }}" | cut -d / -f 1 -)
         repo=$(echo "${{ inputs.repository }}" | cut -d / -f 2 -)
+        module_name=${{ inputs.module_name }}
         module_name=${module_name:-$repo}
         ${{ forge.ACTION_PATH }}/../../tools/add_module_forgejo.sh \
           -m "${{ inputs.module_file }}" \
