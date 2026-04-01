@@ -1,0 +1,14 @@
+module(name = "sdl3", version = "3.4.2")
+
+bazel_dep(name = "rules_cc", version = "0.2.17")
+bazel_dep(name = "rules_license", version = "1.0.0")
+
+sdl3 = use_extension("//:extensions.bzl", "sdl3")
+sdl3.windows(
+    archive_url = "https://github.com/libsdl-org/SDL/releases/download/release-3.4.2/SDL3-devel-3.4.2-VC.zip",
+    integrity = "sha256-/UxgQAY03xOoa2lDKyKzLyO8zWovTGo0tCtHHGXrT9I=",
+    strip_prefix = "SDL3-3.4.2",
+)
+use_repo(sdl3, "sdl3_windows")
+
+inject_repo(sdl3, "rules_cc", "rules_license")
