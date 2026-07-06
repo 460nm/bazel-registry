@@ -1,0 +1,11 @@
+module(
+    name = "rules_slang",
+    version = "0.1.0",
+)
+
+bazel_dep(name = "platforms", version = "1.0.0")
+
+slang = use_extension("//slang:extensions.bzl", "slang")
+use_repo(slang, "slang_toolchains")
+
+register_toolchains("@slang_toolchains//:all")
